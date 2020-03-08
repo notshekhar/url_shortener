@@ -1,10 +1,10 @@
-import express from "express"
-import dotenv from "dotenv"
-import cookies from "cookie-parser"
-import socket from "socket.io"
+let express = require("express")
+let dotenv = require("dotenv")
+let cookies = require("cookie-parser")
+let socket = require("socket.io")
 
-import { signup, getID, login, auth } from "./serverJS/auth.js"
-import { shortURL, getAllUrls, getURL, updateCount } from "./serverJS/urls.js"
+let { signup, getID, login, auth } = require("./serverJS/auth.js")
+let { shortURL, getAllUrls, getURL, updateCount } = require("./serverJS/urls.js")
 
 dotenv.config()
 

@@ -1,5 +1,5 @@
-import datastore from "nedb"
-import dotenv from "dotenv"
+let datastore = require("nedb")
+let dotenv = require("dotenv")
 dotenv.config()
 
 let db = new datastore({
@@ -10,7 +10,7 @@ db.loadDatabase(err => {
     if (err) console.log(err)
 })
 
-export function login(username, password, func) {
+function login(username, password, func) {
     db.find(
         { $and: [{ username: username }, { password: password }] },
         (err, docs) => {
@@ -25,7 +25,7 @@ export function login(username, password, func) {
         }
     )
 }
-export function signup(username, password, func) {
+function signup(username, password, func) {
     db.find({ username: username }, (err, docs) => {
         if (docs.length == 1) {
             func({ signup: false, message: "User Already Exist" })
@@ -43,7 +43,7 @@ export function signup(username, password, func) {
         }
     })
 }
-export function getID(username, password, func) {
+function getID(username, password, func) {
     db.find(
         { $and: [{ username: username }, { password: password }] },
         (err, doc) => {
@@ -52,7 +52,7 @@ export function getID(username, password, func) {
         }
     )
 }
-export function auth(_id, f) {
+function auth(_id, f) {
     db.find({ id: _id }, (err, doc) => {
         if (err) f({ auth: false, message: "Internal Error" })
 
@@ -69,4 +69,12 @@ function generateRandomString() {
         output += v[Math.floor(Math.random() * v.length)]
     }
     return output
+}
+
+
+module.exports = {
+  auth, 
+  login,
+  signup,
+  getID
 }
