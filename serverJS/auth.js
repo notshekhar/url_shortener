@@ -26,25 +26,22 @@ export function login(username, password, func) {
     )
 }
 export function signup(username, password, func) {
-    db.find(
-        { $and: [{ username: username }, { password: password }] },
-        (err, docs) => {
-            if (docs.length == 1) {
-                func({ signup: false, message: "User Already Exist" })
-            } else {
-                db.insert(
-                    { username, password, id: generateRandomString() },
-                    (err, newDoc) => {
-                        func({
-                            signup: true,
-                            message: "Successfully Created Account",
-                            id: newDoc.id
-                        })
-                    }
-                )
-            }
+    db.find({ username: username }, (err, docs) => {
+        if (docs.length == 1) {
+            func({ signup: false, message: "User Already Exist" })
+        } else {
+            db.insert(
+                { username, password, id: generateRandomString() },
+                (err, newDoc) => {
+                    func({
+                        signup: true,
+                        message: "Successfully Created Account",
+                        id: newDoc.id
+                    })
+                }
+            )
         }
-    )
+    })
 }
 export function getID(username, password, func) {
     db.find(
@@ -56,11 +53,11 @@ export function getID(username, password, func) {
     )
 }
 export function auth(_id, f) {
-    db.find({id: _id}, (err, doc)=>{
-        if(err) f({auth: false, message: "Internal Error"})
+    db.find({ id: _id }, (err, doc) => {
+        if (err) f({ auth: false, message: "Internal Error" })
 
-        if(doc.length != 1) f({auth: false, message: "Failed"})
-        else f({auth: true, username: doc[0].username})
+        if (doc.length != 1) f({ auth: false, message: "Failed" })
+        else f({ auth: true, username: doc[0].username })
     })
 }
 
