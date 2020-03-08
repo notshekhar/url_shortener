@@ -1,6 +1,6 @@
 # url_shortener
 
 - Clone the repo
-```js  
+```cmd 
     git clone https://github.com/notshekhar/url_shortener.git 
 ```
