@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Welcome to URL Shortener</title>
+        <link rel="stylesheet" href="../css/bootstrap.min.css" />
+        <script src="../js/jquery.min.js"></script>
+        <script src="../js/bootstrap.bundle.js"></script>
+        <script src="../js/socket.io.js"></script>
+        <script src="../js/cookies.js"></script>
+        <script src="../js/element.js"></script>
+        <link rel="stylesheet" href="../css/index.css" />
+    </head>
+    <body>
+        <div class="container">
+            <br />
+            <form action="../logout" method="GET" class="form-inline">
+                <h3 class="mr-5">Welcome</h3>
+                <button type="submit" class="btn btn-danger logout">
+                    Logout
+                </button>
+            </form>
+            <br />
+            <h2>Short Your URL</h2>
+            <div class="wrap form-inline my-4">
+                <input
+                    type="text"
+                    class="form-control col mr-2 url"
+                    name="url"
+                /><button type="submit" class="btn btn-success submit">
+                    Short
+                </button>
+            </div>
+            <!-- //table  -->
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>URL</th>
+                        <th>ShortedURL</th>
+                        <th>Clicks</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <script src="../js/home.js"></script>
+    </body>
+</html>
