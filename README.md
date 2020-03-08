@@ -1,4 +1,4 @@
-# url_shortener
+# URL Shortener(shorte)
 
 - Clone the repo
 ``` 
