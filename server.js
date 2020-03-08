@@ -58,15 +58,17 @@ app.get("/logout", (req, res) => {
 app.post("/signup", (req, res) => {
     // console.log(req.body)
     // res.redirect("/")
-    signup(req.body.username, req.body.password, r => {
-        if (r.signup) {
-            // let id = r.id
-            res.cookie("_id", r.id)
-            res.redirect("/home")
-        } else {
-            res.json(r)
-        }
-    })
+    if ((req.body.username.length > 3) & (req.body.password.length > 7))
+        signup(req.body.username, req.body.password, r => {
+            if (r.signup) {
+                // let id = r.id
+                res.cookie("_id", r.id)
+                res.redirect("/home")
+            } else {
+                res.redirect("/error")
+            }
+        })
+    else res.redirect("/error")
 })
 app.post("/login", (req, res) => {
     // console.log(req.body)
@@ -76,7 +78,7 @@ app.post("/login", (req, res) => {
             res.cookie("_id", r.data.id)
             res.redirect("/home")
         } else {
-            res.json(r)
+            res.redirect("/error")
         }
     })
 })
