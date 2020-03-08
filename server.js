@@ -49,7 +49,7 @@ app.get("/:surl", (req, res) => {
     let id = req.cookies._id
     getURL(shortURL, id, url => {
         updateCount(shortURL, id, count => {
-            if (count != false) soc.emit("update_count", count)
+            if (count.count != false) soc.emit("update_count", count)
         })
         if (url.fetch) res.redirect(url.src)
         else res.redirect("/home")

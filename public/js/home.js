@@ -21,7 +21,7 @@ function auth() {
         .then(d => d.json())
         .then(e => {
             e.forEach(doc => {
-                addrow(doc.url, doc.shortURL, doc.click)
+                addrow(doc.url, doc.shortURL, doc.click, doc._id)
             })
         })
 })()
@@ -31,14 +31,13 @@ let url = document.querySelector(".url")
 let socket = io(location.origin)
 
 socket.on("url_submitted", data => {
-    addrow(data.url, data.shortURL, data.click)
+    addrow(data.url, data.shortURL, data.click, data._id)
 })
 
-let el
 
 socket.on("update_count", count => {
-    console.log(count)
-    // el.innerText = count
+    let el = document.querySelector(`#${count.id}`)
+    el.innerText = count.count
 })
 
 submit.onclick = () => {
@@ -51,7 +50,7 @@ submit.onclick = () => {
     }
 }
 
-function addrow(u, s, c) {
+function addrow(u, s, c, _id) {
     let tr = new_element("tr")
     let td0 = new_element("td")
     let a0 = new_element("a", {
@@ -72,8 +71,10 @@ function addrow(u, s, c) {
         el.innerText = parseInt(el.innerText) + 1
     })
     td1.append(a1)
-    let td2 = new_element("td")
-    td2.innerText = c
+    let td2 = new_element("td", {
+        innerText: c,
+        id: _id
+    })
     tr.append(td0, td1, td2)
     document.querySelector("tbody").prepend(tr)
 }
