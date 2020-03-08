@@ -34,20 +34,15 @@ socket.on("url_submitted", data => {
     addrow(data.url, data.shortURL, data.click, data._id)
 })
 
-
 socket.on("update_count", count => {
     let el = document.querySelector(`#${count.id}`)
     el.innerText = count.count
 })
 
 submit.onclick = () => {
-    let _url = url.value
-    if (urlValidator(url)) {
-        auth()
-        socket.emit("url", { url: _url, id: cookie.getItem("_id") })
-    } else {
-        alert("Invalid url")
-    }
+    let _url = makeUrl(url.value)
+    auth()
+    socket.emit("url", { url: _url, id: cookie.getItem("_id") })
 }
 
 function addrow(u, s, c, _id) {
@@ -79,8 +74,11 @@ function addrow(u, s, c, _id) {
     document.querySelector("tbody").prepend(tr)
 }
 
-function urlValidator(url) {
-    return true
+function makeUrl(str) {
+    let a = str.split(":")
+    let url = str
+    if (a[0] == "https" || a[0] == "http") return url
+    else return "https://" + url
 }
 
 let logout = document.querySelector(".logout")
