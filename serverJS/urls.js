@@ -34,9 +34,9 @@ function updateCount(shortURL, id, f) {
                 { shortURL, id },
                 { shortURL, id, url: d[0].url, click: count }
             )
-            f(count)
+            f({count, id: d[0]["_id"]})
         } else {
-            f(false)
+            f({count: false})
         }
     })
 }
