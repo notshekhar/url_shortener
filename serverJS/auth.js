@@ -71,10 +71,9 @@ function generateRandomString() {
     return output
 }
 
-
 module.exports = {
-  auth, 
-  login,
-  signup,
-  getID
+    signup,
+    login,
+    auth,
+    getID
 }

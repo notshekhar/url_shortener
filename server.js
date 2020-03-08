@@ -4,7 +4,12 @@ let cookies = require("cookie-parser")
 let socket = require("socket.io")
 
 let { signup, getID, login, auth } = require("./serverJS/auth.js")
-let { shortURL, getAllUrls, getURL, updateCount } = require("./serverJS/urls.js")
+let {
+    shortURL,
+    getAllUrls,
+    getURL,
+    updateCount
+} = require("./serverJS/urls.js")
 
 dotenv.config()
 

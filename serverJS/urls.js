@@ -6,6 +6,7 @@ let db = new datastore({ filename: process.env.URLS, corruptAlertThreshold: 1 })
 db.loadDatabase(err => {
     if (err) console.log(err)
 })
+
 function shortURL(url, id, f) {
     db.insert(
         { id: id, url: url, shortURL: generateRandomString(), click: 0 },
@@ -27,11 +28,14 @@ function getURL(shortURL, id, f) {
 }
 function updateCount(shortURL, id, f) {
     db.find({ shortURL, id }, (e, d) => {
-        if(d.length == 1){
+        if (d.length == 1) {
             let count = d[0].click + 1
-            db.update({ shortURL, id }, { shortURL, id, url: d[0].url, click:  count})
+            db.update(
+                { shortURL, id },
+                { shortURL, id, url: d[0].url, click: count }
+            )
             f(count)
-        }else{
+        } else {
             f(false)
         }
     })
@@ -47,8 +51,8 @@ function generateRandomString() {
 }
 
 module.exports = {
-  updateCount,
-  getURL,
-  getAllUrls,
-  shortURL
+    shortURL,
+    getURL,
+    getAllUrls,
+    updateCount
 }
