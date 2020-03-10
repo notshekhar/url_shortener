@@ -21,17 +21,17 @@ let db = {
 }
 function users() {
     db.auth.find({}, (err, docs) => {
-        console.log(docs)
+        console.log(docs, docs.length)
     })
 }
 function urls() {
     db.urls.find({}, (err, docs) => {
-        console.log(docs)
+        console.log(docs, docs.length)
     })
 }
 function requests() {
     db.requests.find({}, (err, docs) => {
-        console.log(docs)
+        console.log(docs, docs.length)
     })
 }
 let option = process.argv[2]
@@ -43,7 +43,7 @@ if (option) {
         case "urls":
             urls()
             break
-        case "requests":
+        case "reqs":
             requests()
             break
         default:
