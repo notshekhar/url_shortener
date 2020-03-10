@@ -45,6 +45,7 @@ app.get("/getAllurls", (req, res) => {
     })
 })
 app.get("/:surl", (req, res) => {
+    console.log(req.ip, req.protocol, req.params.surl)
     let shortURL = req.params.surl
     getURL(shortURL, url => {
         updateCount(shortURL, count => {
