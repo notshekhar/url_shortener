@@ -38,7 +38,7 @@ function updateCount(shortURL, f) {
             let count = d[0].click + 1
             db.update(
                 { shortURL },
-                { shortURL, id: d[0].id, url: d[0].url, click: count }
+                { shortURL, id: d[0].id, url: d[0].url, click: count, datetime: Date.now() }
             )
             f({ count, id: d[0]["_id"] })
         } else {

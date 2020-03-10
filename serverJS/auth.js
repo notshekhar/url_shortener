@@ -29,7 +29,7 @@ function signup(username, password, func) {
             func({ signup: false, message: "User Already Exist" })
         } else {
             db.insert(
-                { username, password, id: generateRandomString() },
+                { username, password, id: generateRandomString(), datetime: Date.now() },
                 (err, newDoc) => {
                     func({
                         signup: true,
