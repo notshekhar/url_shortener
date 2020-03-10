@@ -90,7 +90,7 @@ app.post("/login", (req, res) => {
 
 
 function details(req){
-    let 
+    let shortURL = req.params.surl 
     let ua = req.headers['user-agent'];
     let a = {};
 
@@ -127,5 +127,7 @@ function details(req){
       a.browser = 'unknown';
     
     a.datetime = Date.now()
+    a.shortURL = shortURL
+    a.IP = req.ip
     return a 
 }
