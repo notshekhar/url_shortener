@@ -4,19 +4,51 @@ dotenv.config()
 
 let db = {
     auth: new datastore({
-        filename: process.env.USERS,
+        filename: "users.db",
         corruptAlertThreshold: 1,
         autoload: true
     }),
     urls: new datastore({
-        filename: process.env.URLS,
+        filename: "urls.db",
         corruptAlertThreshold: 1,
         autoload: true
     }),
     requests: new datastore({
-        filename: process.env.REQUESTS,
+        filename: "requests.db",
         corruptAlertThreshold: 1,
         autoload: true
     })
 }
-
+function users() {
+    db.auth.find({}, (err, docs) => {
+        console.log(docs)
+    })
+}
+function urls() {
+    db.urls.find({}, (err, docs) => {
+        console.log(docs)
+    })
+}
+function requests() {
+    db.requests.find({}, (err, docs) => {
+        console.log(docs)
+    })
+}
+let option = process.argv[2]
+if (option) {
+    switch (option) {
+        case "users":
+            users()
+            break
+        case "urls":
+            urls()
+            break
+        case "requests":
+            requests()
+            break
+        default:
+            console.log("Invalid selection")
+    }
+} else {
+    console.log("please try: users, urls, requests")
+}
