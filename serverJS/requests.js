@@ -15,6 +15,7 @@ let db = new datastore({
 
 function saveRequest(req, type, f) {
     let d = getDetails(req, type)
+    console.log(d)
     db.insert(d, (err, newEntry)=>{
         f(newEntry)
     })
