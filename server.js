@@ -128,6 +128,7 @@ function details(req){
     
     a.datetime = Date.now()
     a.shortURL = shortURL
-    a.IP = req.ip
+    a.IP = req.header('x-forwarded-for')
+  
     return a 
 }
