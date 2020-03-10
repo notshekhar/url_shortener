@@ -2,14 +2,20 @@ let datastore = require("nedb")
 let dotenv = require("dotenv")
 dotenv.config()
 
-let db = new datastore({ filename: process.env.URLS, corruptAlertThreshold: 1 })
-db.loadDatabase(err => {
-    if (err) console.log(err)
+let db = new datastore({
+    filename: process.env.URLS,
+    corruptAlertThreshold: 1,
+    autoload: true
 })
-
 function shortURL(url, id, f) {
     db.insert(
-        { id: id, url: url, shortURL: generateRandomString(), click: 0, datetime: Date.now()},
+        {
+            id: id,
+            url: url,
+            shortURL: generateRandomString(),
+            click: 0,
+            datetime: Date.now()
+        },
         (err, newEntry) => {
             f(newEntry)
         }
@@ -34,9 +40,9 @@ function updateCount(shortURL, f) {
                 { shortURL },
                 { shortURL, id: d[0].id, url: d[0].url, click: count }
             )
-            f({count, id: d[0]["_id"]})
+            f({ count, id: d[0]["_id"] })
         } else {
-            f({count: false})
+            f({ count: false })
         }
     })
 }

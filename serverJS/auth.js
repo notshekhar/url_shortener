@@ -4,10 +4,8 @@ dotenv.config()
 
 let db = new datastore({
     filename: process.env.USERS,
-    corruptAlertThreshold: 1
-})
-db.loadDatabase(err => {
-    if (err) console.log(err)
+    corruptAlertThreshold: 1,
+    autoload: true
 })
 
 function login(username, password, func) {
