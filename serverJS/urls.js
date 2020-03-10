@@ -9,7 +9,7 @@ db.loadDatabase(err => {
 
 function shortURL(url, id, f) {
     db.insert(
-        { id: id, url: url, shortURL: generateRandomString(), click: 0 },
+        { id: id, url: url, shortURL: generateRandomString(), click: 0, datetime: Date.now()},
         (err, newEntry) => {
             f(newEntry)
         }

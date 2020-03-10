@@ -45,7 +45,7 @@ app.get("/getAllurls", (req, res) => {
     })
 })
 app.get("/:surl", (req, res) => {
-    console.log(whichBrowser(req))
+    console.log(whichBrowser(req), Date.now())
     let shortURL = req.params.surl
     getURL(shortURL, url => {
         updateCount(shortURL, count => {
