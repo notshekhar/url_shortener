@@ -45,7 +45,8 @@ app.get("/getAllurls", (req, res) => {
     })
 })
 app.get("/:surl", (req, res) => {
-    console.log(req.ip, req.protocol, req.params.surl)
+    console.log(req.ip,req.params.surl, whichBrowser(req))
+    
     let shortURL = req.params.surl
     getURL(shortURL, url => {
         updateCount(shortURL, count => {
@@ -87,3 +88,22 @@ app.post("/login", (req, res) => {
         }
     })
 })
+
+
+
+
+function whichBrowser(req){
+    let ua = req.headers['user-agent']
+    let browser = "unknown"
+    if( /firefox/i.test(ua) )
+      browser = 'firefox'
+    else if( /chrome/i.test(ua) )
+      browser = 'chrome'
+    else if( /safari/i.test(ua) )
+      browser = 'safari'
+    else if( /msie/i.test(ua) )
+      browser = 'msie'
+    else
+      browser = 'unknown'
+    return browser
+}
