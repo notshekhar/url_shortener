@@ -46,9 +46,8 @@ app.get("/getAllurls", (req, res) => {
 })
 app.get("/:surl", (req, res) => {
     let shortURL = req.params.surl
-    let id = req.cookies._id
-    getURL(shortURL, id, url => {
-        updateCount(shortURL, id, count => {
+    getURL(shortURL, url => {
+        updateCount(shortURL, count => {
             if (count.count != false) soc.emit("update_count", count)
         })
         if (url.fetch) res.redirect(url.src)
