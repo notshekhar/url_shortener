@@ -20,19 +20,19 @@ function getAllUrls(id, f) {
         f(docs)
     })
 }
-function getURL(shortURL, id, f) {
-    db.find({ shortURL, id }, (err, data) => {
+function getURL(shortURL, f) {
+    db.find({ shortURL }, (err, data) => {
         if (err || data.length != 1) f({ fetch: false })
         else f({ src: data[0].url, fetch: true })
     })
 }
-function updateCount(shortURL, id, f) {
-    db.find({ shortURL, id }, (e, d) => {
+function updateCount(shortURL, f) {
+    db.find({ shortURL }, (e, d) => {
         if (d.length == 1) {
             let count = d[0].click + 1
             db.update(
-                { shortURL, id },
-                { shortURL, id, url: d[0].url, click: count }
+                { shortURL },
+                { shortURL, id: d[0].id, url: d[0].url, click: count }
             )
             f({count, id: d[0]["_id"]})
         } else {

@@ -31,7 +31,10 @@ let url = document.querySelector(".url")
 let socket = io(location.origin)
 
 socket.on("url_submitted", data => {
-    addrow(data.url, data.shortURL, data.click, data._id)
+    let user_id = cookie.getItem("_id")
+    if (user_id == data.id) {
+        addrow(data.url, data.shortURL, data.click, data._id)
+    }
 })
 
 socket.on("update_count", count => {
