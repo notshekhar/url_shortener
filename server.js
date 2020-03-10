@@ -45,7 +45,7 @@ app.get("/getAllurls", (req, res) => {
     })
 })
 app.get("/:surl", (req, res) => {
-    console.log(whichBrowser(req), Date.now())
+    console.log(details(req))
     let shortURL = req.params.surl
     getURL(shortURL, url => {
         updateCount(shortURL, count => {
@@ -89,7 +89,8 @@ app.post("/login", (req, res) => {
 })
 
 
-function whichBrowser(req){
+function details(req){
+    let 
     let ua = req.headers['user-agent'];
     let a = {};
 
@@ -124,5 +125,7 @@ function whichBrowser(req){
       a.browser = 'msie';
     else
       a.browser = 'unknown';
+    
+    a.datetime = Date.now()
     return a 
 }
